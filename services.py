@@ -1,5 +1,7 @@
+import os
 from .utils.db import db_connection, insert_update, select
 import hashlib
+import jwt
 
 def get_product_types_service():
     def convert_product_to_dict(product_id, product_name):
@@ -95,8 +97,24 @@ def onboarding_service(onboarding_body):
     return success
 
 
-def login_service():
-    pass
+def login_service(email, password):
+    access_token, user_id = None, None
+
+    password_hash = hashlib.sha256(password.encode('utf-8')).hexdigest()
+    query = f"""
+        SELECT id FROM Users WHERE email='{email}' AND
+        password_hash='{password_hash}'
+    """
+    resp = select(query)
+
+    if bool(resp) is True:
+        payload = {
+            "user_id": resp[0][0]
+        }
+        access_token = jwt.encode(payload, os.getenv('JWT_SECRET'), algorithm="HS256")
+        user_id = resp[0][0]
+    return access_token, user_id
+
 
 def metrics_service():
     pass

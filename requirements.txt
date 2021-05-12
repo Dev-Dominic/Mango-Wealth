@@ -1,12 +1,17 @@
+cffi==1.14.5
 click==7.1.2
+cryptography==3.4.7
 Flask==1.1.2
 Flask-Cors==3.0.10
 gunicorn==20.1.0
 itsdangerous==1.1.0
 Jinja2==2.11.3
+jwcrypto==0.8
 MarkupSafe==1.1.1
 mysql-connector-python==8.0.25
 protobuf==3.16.0
+pycparser==2.20
+PyJWT==2.1.0
 python-dotenv==0.17.1
 six==1.16.0
 Werkzeug==1.0.1
