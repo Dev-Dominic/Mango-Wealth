@@ -15,6 +15,10 @@ CREATE TABLE Users(
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     age TINYINT(100) NOT NULL,
+    gender ENUM('MALE', 'FEMALE') DEFAULT NULL,
+    employment_status ENUM('FULL-TIME', 'PART-TIME', 'UNEMPLOYED', 'STUDENT', 'PART-TIME-STUDENT', 'VOLUNTEER') DEFAULT NULL,
+    salary_period ENUM('WEEKLY', 'BI-WEEKLY', 'SEMI-MONTHLY', 'MONTHLY') DEFAULT NULL,
+    risk_profile TINYINT(5) NOT NULL,
     email VARCHAR(256) NOT NULL,
     password_hash VARCHAR(256) NOT NULL,
     PRIMARY KEY(id)
@@ -22,9 +26,8 @@ CREATE TABLE Users(
 
 CREATE TABLE UserFinancialsRecords(
     id INT NOT NULL AUTO_INCREMENT,
-    income INT NOT NULL,
-    expenses INT NOT NULL,
-    risk_profile TINYINT(100) NOT NULL,
+    income DOUBLE NOT NULL,
+    expenses DOUBLE NOT NULL,
     recordDate DATE NOT NULL DEFAULT NOW(),
     userId INT NOT NULL,
     PRIMARY KEY(id),
@@ -45,7 +48,7 @@ CREATE TABLE UserFinancialInstitutions(
     FOREIGN KEY(institutionId) REFERENCES FinancialInstitutions(id) ON DELETE CASCADE
 );
 
-CREATE TABLE ProductType(
+CREATE TABLE ProductTypes(
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(256) NOT NULL,
     PRIMARY KEY(id)
@@ -61,7 +64,7 @@ CREATE TABLE FinancialProducts(
     productTypeId INT NOT NULL,
     institutionId INT NOT NULL,
     PRIMARY KEY(id),
-    FOREIGN KEY(productTypeId) REFERENCES ProductType(id) ON UPDATE CASCADE,
+    FOREIGN KEY(productTypeId) REFERENCES ProductTypes(id) ON UPDATE CASCADE,
     FOREIGN KEY(institutionId) REFERENCES FinancialInstitutions(id) ON UPDATE CASCADE
 );
 
@@ -88,12 +91,26 @@ CREATE TABLE Recommendations(
     FOREIGN KEY(financialProductId) REFERENCES FinancialProducts(id) ON DELETE CASCADE
 );
 
+CREATE TABLE UserProductPreferences(
+    userId INT NOT NULL,
+    productTypeId INT NOT NULL,
+    minimum_deposit TINYINT(5) NOT NULL DEFAULT 1,
+    additional_fees TINYINT(5) NOT NULL DEFAULT 1,
+    interest_rate TINYINT(5) NOT NULL DEFAULT 1,
+    time_period TINYINT(5) NOT NULL DEFAULT 1,
+    risk TINYINT(5) NOT NULL DEFAULT 1,
+    preference_number TINYINT(3) NOT NULL DEFAULT 1,
+    PRIMARY KEY(userId, productTypeId),
+    FOREIGN KEY(userId) REFERENCES Users(id) ON DELETE CASCADE,
+    FOREIGN KEY(productTypeId) REFERENCES ProductTypes(id) ON DELETE CASCADE
+);
+
 /* ################ INSERTING DEFAULT VALUE INTO TABLES  ################### */
 
 -- Inserting basic Financial Product Types
-INSERT INTO ProductType(name) VALUES("SAVINGS");
-INSERT INTO ProductType(name) VALUES("INVESTMENTS");
-INSERT INTO ProductType(name) VALUES("LOANS");
+INSERT INTO ProductTypes(name) VALUES("SAVINGS");
+INSERT INTO ProductTypes(name) VALUES("INVESTMENTS");
+INSERT INTO ProductTypes(name) VALUES("LOANS");
 
 /* ######### STORED PROCEDURE FOR CREATING VECTOR OBJECTS  ################# */
 
