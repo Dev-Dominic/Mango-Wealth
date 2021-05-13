@@ -4,9 +4,12 @@ import json
 from .services import (get_product_types_service, onboarding_service,
                        login_service, metrics_service, tracking_service)
 
+from .utils.auth import auth_guard
+
 api = Blueprint('api', __name__)
 
 @api.route('/product_types', methods=['GET'])
+@auth_guard
 def get_product_types():
     return json.dumps(get_product_types_service()), 200
 
@@ -51,9 +54,11 @@ def login():
 
 
 @api.route('/tracking', methods=['POST'])
+@auth_guard
 def tracking():
     pass
 
 @api.route('/metrics_service', methods=['GET'])
+@auth_guard
 def user_metrics():
     pass
