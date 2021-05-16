@@ -46,7 +46,7 @@ def onboarding_service(onboarding_body):
 
     # Inserting user information
     user_insertion_query = f"""
-        INSERT INTO users(first_name, last_name, age, gender, employment_status,
+        INSERT INTO Users(first_name, last_name, age, gender, employment_status,
         salary_period, risk_profile, email, password_hash)
         VALUES('{first_name}', '{last_name}', {age}, '{gender}',
         '{employment_status}', '{salary_period}', {risk_profile},'{email}', '{password_hash}')
