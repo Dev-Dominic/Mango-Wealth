@@ -52,6 +52,18 @@ def login():
         }
         return json.dumps(response), 500
 
+@api.route('/goal', methods=['POST'])
+def create_goal():
+    try:
+        return json.dumps(response), 200
+    except Exception as e:
+        print("Error during goal creation: {e}")
+        error_message = "Unable to create new user goal"
+
+        response = {
+            "error_message": error_message
+        }
+        return json.dumps(response), 500
 
 @api.route('/tracking', methods=['POST'])
 @auth_guard

@@ -11,6 +11,10 @@ def get_product_types_service():
         }
 
     result = select("SELECT * FROM ProductTypes")
+
+    if result is None:
+        return None
+
     product_types = []
     for entry in result:
         product_id, product_name = entry[0], entry[1]
@@ -42,7 +46,7 @@ def onboarding_service(onboarding_body):
 
     # Inserting user information
     user_insertion_query = f"""
-        INSERT INTO Users(first_name, last_name, age, gender, employment_status,
+        INSERT INTO users(first_name, last_name, age, gender, employment_status,
         salary_period, risk_profile, email, password_hash)
         VALUES('{first_name}', '{last_name}', {age}, '{gender}',
         '{employment_status}', '{salary_period}', {risk_profile},'{email}', '{password_hash}')

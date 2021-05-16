@@ -61,6 +61,7 @@ CREATE TABLE FinancialProducts(
     minimum_deposit INT NOT NULL DEFAULT 0,
     risk_profile TINYINT(100) NOT NULL,
     interest_rate DOUBLE NOT NULL,
+    product_link TEXT NOT NULL,
     productTypeId INT NOT NULL,
     institutionId INT NOT NULL,
     PRIMARY KEY(id),
@@ -105,6 +106,27 @@ CREATE TABLE UserProductPreferences(
     FOREIGN KEY(productTypeId) REFERENCES ProductTypes(id) ON DELETE CASCADE
 );
 
+CREATE TABLE Goals(
+    id INT NOT NULL,
+    userId INT NOT NULL,
+    financialProductId INT NOT NULL,
+    amount DOUBLE NOT NULL,
+    time_period INT NOT NULL,
+    record_date DATETIME NOT NULL DEFAULT NOW(),
+    PRIMARY KEY(id),
+    FOREIGN KEY(userId) REFERENCES Users(id) ON DELETE CASCADE,
+    FOREIGN KEY(financialProductId) REFERENCES FinancialProducts(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Progress(
+    progressId INT NOT NULL,
+    goalId INT NOT NULL,
+    gains DOUBLE NOT NULL,
+    record_date DATETIME NOT NULL DEFAULT NOW(),
+    PRIMARY KEY(progressId),
+    FOREIGN KEY(goalId) REFERENCES Goals(id) ON DELETE CASCADE
+);
+
 /* ################ INSERTING DEFAULT VALUE INTO TABLES  ################### */
 
 -- Inserting basic Financial Product Types
@@ -113,4 +135,3 @@ INSERT INTO ProductTypes(name) VALUES("INVESTMENTS");
 INSERT INTO ProductTypes(name) VALUES("LOANS");
 
 /* ######### STORED PROCEDURE FOR CREATING VECTOR OBJECTS  ################# */
-
