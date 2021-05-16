@@ -1,1 +1,1 @@
-web: cd Mango-Wealth-Server && gunicorn __init__:app
+web: gunicorn --chdir ../ app.app:app
