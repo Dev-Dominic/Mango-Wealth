@@ -1,0 +1,53 @@
+Product Name,Finacial Institution,Minimum Deposit,Additional Fees,Risk Profile Score,Max Lifetime,Product Category,Interest Rates,Link
+Scotia Conservative Portfolio,Scotia Bank,800000,?,Medium,?,Investments,?,https://jm.scotiabank.com/scotia-investments/scotia-funds/scotia-portfolios/scotia-conservative-portfolio.html
+Sccotia Conservative Balanced Portfolio,Scotia Bank,800000,?,Medium,?,Investments,?,https://jm.scotiabank.com/scotia-investments/scotia-funds/scotia-portfolios/scotia-conservative-balanced-portfolio.html
+Scotia Balanced Portfolio,Scotia Bank,800000,?,Medium,?,Investments,?,https://jm.scotiabank.com/scotia-investments/scotia-funds/scotia-portfolios/scotia-balanced-portfolio.html
+Scotia Balanced Growth Portfolio,Scotia Bank,800000,?,Medium,?,Investments,?,https://jm.scotiabank.com/scotia-investments/scotia-funds/scotia-portfolios/scotia-balanced-growth-portfolio.html
+Scotia Growth Portfolio,Scotia Bank,800000,?,High,?,Investments,?,https://jm.scotiabank.com/scotia-investments/scotia-funds/scotia-portfolios/scotia-growth-portfolio.html
+Scotia Money Market Fund,Scotia Bank,150000,?,Low,?,Investments,?,https://jm.scotiabank.com/scotia-investments/scotia-funds/money-market-funds/scotia-money-market-fund.html
+Scotia Premium Money Market Fund,Scotia Bank,150000,?,Low,?,Investments,?,https://jm.scotiabank.com/scotia-investments/scotia-funds/money-market-funds/scotia-premium-money-market-fund.html
+Scotia US Dollar Bond Fund,Scotia Bank,150000,?,Medium,?,Investments,?,https://jm.scotiabank.com/scotia-investments/scotia-funds/fixed-income-funds/scotia-us-dollar-bond-fund.html
+Scotia Caribbean Income Fund,Scotia Bank,800000,?,Medium,?,Investments,?,https://jm.scotiabank.com/scotia-investments/scotia-funds/fixed-income-funds/scotia-caribbean-income-fund.html
+Scotia Premium Fixed Income Fund,Scotia Bank,10000,?,Medium,?,Investments,?,https://jm.scotiabank.com/scotia-investments/scotia-funds/fixed-income-funds/scotia-premium-fixed-income-fund.html
+Scotia Premium US Dollar Indexed Fund,Scotia Bank,150000,?,Medium,?,Investments,?,https://jm.scotiabank.com/scotia-investments/scotia-funds/fixed-income-funds/scotia-premium-us-dollar-indexed-fund.html
+Scotia Global Equity Fund,Scotia Bank,150000,?,High,?,Investments,?,https://jm.scotiabank.com/scotia-investments/scotia-funds/equity-funds/scotia-global-equity-fund.html
+Scotia Premium Growth Fund,Scotia Bank,10000,?,High,?,Investments,?,https://jm.scotiabank.com/scotia-investments/scotia-funds/equity-funds/scotia-premium-growth-fund.html
+Scotia Canadian Equity Fund,Scotia Bank,150000,?,High,?,Investments,?,https://jm.scotiabank.com/scotia-investments/scotia-funds/equity-funds/scotia-canadian-equity-fund.html
+Fixed Term Deposit,Scotia Bank,100000,?,Medium,60,Investments,?,https://jm.scotiabank.com/personal/wealth/term-deposits/fixed-term-deposit.html
+Fixed Term Deposit - Monthly Deposit,Scotia Bank,500000,?,Low,60,Investments,?,https://jm.scotiabank.com/personal/wealth/term-deposits/fixed-term-deposit-monthly-income.html
+Rate Booster Term Deposit,Scotia Bank,250000,?,Low,36,Investments,?,https://jm.scotiabank.com/personal/wealth/term-deposits/rate-booster-term-deposit.html
+SMART Retirement Plan,NCB,?,?,Low,?,Investments,?,https://www.jncb.com/Personal/Investing/Retirement-Plans/SMART-Retirement-Plan
+OMNI Educator,NCB,?,?,Low,?,Investments,?,https://www.jncb.com/Personal/Investing/Education-Investments/OMNI-Educator
+Auto Loan,JN Bank,None,?,Low,108,Loans,?,https://www.jnbank.com/auto-loans/#1513269757988-2609fe06-b2e1
+Line of Credit,JN Bank,None,?,Low,?,Loans,?,https://www.jnbank.com/line-of-credit/#1511879145449-4d24ca14-b077
+Scotia Plan Loans,Scotia Bank,None,?,Low,?,Loans,?,https://jm.scotiabank.com/personal/borrowing/scotia-plan-loan.html
+Scotia Auto Loans,Scotia Bank,None,?,Low,90,Loans,0.0829,https://jm.scotiabank.com/personal/borrowing/auto-loans.html
+Home Builders Loan,Scotia Bank,None,?,Low,?,Loans,?,https://jm.scotiabank.com/personal/borrowing/home-builder-loans.html
+Fast Cash Loan,NCB,None,?,Low,?,Loans,?,https://loans.jncb.com/fastCash
+Pay Advance Loan,NCB,None,?,Low,?,Loans,?,https://loans.jncb.com/paydayloan
+Pre-approved Unsecured Loan,NCB,None,?,Low,?,Loans,?,https://loans.jncb.com/
+Unsecured Loans,NCB,None,?,Low,?,Loans,?,https://www.jncb.com/Personal/Loans-Financing/Personal-Loans/Unsecured-Loans
+Secured Loans,NCB,None,?,Low,?,Loans,?,https://www.jncb.com/Personal/Loans-Financing/Personal-Loans/Secured-Loans
+Cash Secured Loan in 30 Minutes,NCB,100000,?,Low,?,Loans,?,https://www.jncb.com/Personal/Loans-Financing/Personal-Loans/Cash-Secured-Loan-in-%C2%BD-Hour
+"JN Wealth Optimizer Account",JN Bank,5000,None,Low,?,Savings,?,https://www.jnbank.com/personal-banking/savings/regular-savings/wealth-optimizer-account/
+Regular Savings Account,JN Bank,2500,None,Low,?,Savings,?,https://www.jnbank.com/personal-banking/savings/regular-savings/
+JN Baby Register Account,JN Bank,2500,None,Low,?,Savings,?,https://www.jnbank.com/personal-banking/savings/regular-savings/jn-baby-registry-account/
+JN Bridal Registry Account,JN Bank,2500,None,Low,?,Savings,?,https://www.jnbank.com/personal-banking/savings/regular-savings/jn-bridal-registry-account/
+JN Vacation Account,JN Bank,8000,None,Low,?,Savings,?,"https://www.jnbank.com/personal-banking/savings/regular-savings/jn-vacation-account/"
+Long-Term Savings,JN Bank,25000,None,Low,?,Savings,?,"https://www.jnbank.com/personal-banking/savings/fixed-deposits/jmd-long-term-savings-25k/#1511188518980-6660dd3b-94aa"
+BeWise Savings Plans,JN Bank,100000,None,Low,?,Savings,?, https://www.jnbank.com/personal-banking/savings/fixed-deposits/
+Direct Gain Account,JN Bank,25000,None,Low,?,Savings,?,https://www.jnbank.com/personal-banking/savings/fixed-deposits/jn-direct-gain-account/
+JN Partna Plan,JN Bank,1000,None,Low,?,Savings,?,https://www.jnbank.com/personal-banking/savings/contractual-savings/jn-partna-plan-account/#1511188518980-6660dd3b-94aa
+JN High Yield,JN Bank,5000,None,Low,?,Savings,?,"https://www.jnbank.com/personal-banking/savings/contractual-savings/jn-high-yield-account/"
+Scotia Saving Account,Scotia Bank,5000,180,Low,?,Savings,?,"https://jm.scotiabank.com/personal/chequing-and-savings/savings.html"
+Scotia Seniors Account,Scotia Bank,5000,?,Low,?,Savings,?,https://jm.scotiabank.com/personal/chequing-and-savings/seniors-account.html
+Scotia Care Access Account,Scotia Bank,None,None,Low,?,Savings,?,https://jm.scotiabank.com/personal/chequing-and-savings/scotia-care-access-account.html
+Automatic Savings Plan,Scotia Bank,None,None,Low,?,Savings,0.01,https://jm.scotiabank.com/personal/chequing-and-savings/automatic-savings-plan-asp.html
+Scotiabank Savings Reward Plan,Scotia Bank,None,None,Low,?,Savings,0.01,https://jm.scotiabank.com/personal/chequing-and-savings/scotiabank-savings-reward-plan-ssrp.html
+Quick Save,NCB,None,?,Low,?,Savings,?,https://www.jncb.com/Personal/Banking/Savings-Accounts/Quick_Save
+Regular Save,NCB,2000,?,Low,?,Savings,?,https://www.jncb.com/Personal/Banking/Savings-Accounts/Regular-Save
+Max Deposit,NCB,50000,?,Low,?,Savings,?,https://www.jncb.com/Personal/Banking/Savings-Accounts/Max-Deposit
+S.T.A.R.T,NCB,100,?,Low,?,Savings,?,https://www.jncb.com/Personal/Banking/Savings-Accounts/S-T-A-R-T
+Gold Club,NCB,5000,?,Low,?,Savings,?,https://www.jncb.com/Personal/Banking/Savings-Accounts/Gold-Club
+Sunshine Savers,NCB,10000,?,Low,?,Savings,?,https://www.jncb.com/Personal/Banking/Savings-Accounts/Sunshine-Savers
+Special Occasions Savings Plan,NCB,1000,?,Low,?,Savings,?,https://www.jncb.com/Personal/Banking/Savings-Accounts/Special-Occasiona-Savings-Plan
