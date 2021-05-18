@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def db_connection():
+def db_connection(dictionary=False):
     mydb = mysql.connector.connect(
         host=os.getenv("DB_HOST"),
         user=os.getenv("DB_USER"),
@@ -13,7 +13,7 @@ def db_connection():
         database=os.getenv("DB_NAME")
     )
     mydb.autocommit = False
-    cursor = mydb.cursor()
+    cursor = mydb.cursor(dictionary=dictionary)
 
     return mydb, cursor
 
@@ -43,10 +43,10 @@ def insert_update(db_instance, queryString, commit=False, want_result=False):
         mydb.close()
         return False, None
 
-def select(queryString):
+def select(queryString, dictionary=False):
     try:
         # Getting database connection instance and cusror to execute queries
-        _, cursor = db_connection()
+        _, cursor = db_connection(dictionary)
 
         print(f'Executing query: {queryString}')
         cursor.execute(queryString);

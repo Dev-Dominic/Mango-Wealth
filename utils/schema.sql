@@ -16,7 +16,7 @@ CREATE TABLE Users(
     last_name VARCHAR(30) NOT NULL,
     age TINYINT(100) NOT NULL,
     gender ENUM('MALE', 'FEMALE') DEFAULT NULL,
-    employment_status ENUM('FULL-TIME', 'PART-TIME', 'UNEMPLOYED', 'STUDENT', 'PART-TIME-STUDENT', 'VOLUNTEER') DEFAULT NULL,
+    employment_status ENUM('FULL-TIME', 'PART-TIME', 'FULL-TIME STUDENT','UNEMPLOYED', 'PART-TIME STUDENT', 'NOT EMPLOYED FOR PAY', 'FULL-TIME; FULL-TIME STUDENT', 'FULL-TIME; PART-TIME STUDENT', 'PART-TIME; FULL-TIME STUDENT', 'PART-TIME; PART-TIME STUDENT', 'NOT EMPLOYED FOR PAY; FULL-TIME STUDENT') DEFAULT NULL,
     salary_period ENUM('WEEKLY', 'BI-WEEKLY', 'SEMI-MONTHLY', 'MONTHLY') DEFAULT NULL,
     risk_profile TINYINT(5) NOT NULL,
     email VARCHAR(256) NOT NULL,
@@ -164,8 +164,9 @@ CREATE PROCEDURE ProductVector()
 BEGIN
     SELECT f.id AS id, f.minimum_deposit as minimum_deposit, SUM(fpf.amount) AS additional_fees,
     f.maturity_period AS maturity_period, f.interest_rate AS interest_rate,
-    f.risk_profile AS risk_profile FROM FinancialProducts AS f
+    f.risk_profile AS risk_profile, SUBSTRING(pt.name, 1, 1) AS product_type FROM FinancialProducts AS f
     JOIN FinancialProductsFees AS fpf ON f.id = fpf.financialProductId
+    JOIN ProductTypes AS pt ON pt.id = f.productTypeId
     GROUP BY f.id;
 END;
 //

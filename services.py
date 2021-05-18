@@ -1,5 +1,5 @@
 import os
-from .utils.db import db_connection, insert_update, select
+from .utils.db import db_connection, insert_update, select, call_proc
 import hashlib
 import jwt
 
@@ -23,7 +23,7 @@ def get_product_types_service():
 
 
 def onboarding_service(onboarding_body):
-    success = False
+    success, user_id = False, None
 
     # Extracting user onboarding attributes
     first_name = onboarding_body.get('first_name')
@@ -98,7 +98,7 @@ def onboarding_service(onboarding_body):
                                                                commit)
                 success = user_product_preference_success
 
-    return success
+    return success, user_id
 
 
 def login_service(email, password):
@@ -119,6 +119,26 @@ def login_service(email, password):
         user_id = resp[0][0]
     return access_token, user_id
 
+
+def create_goal_service(time_period, value, user_id):
+
+    # Getting user vector based on user_id
+    user_vector = list(call_proc('UserVector', [user_id])[0])
+    user_vector.append(time_period)
+    user_vector.append(value)
+
+    # Getting all product vectors
+    product_vectors = [list(entry) for entry in call_proc('ProductVector')]
+
+    # Pass to reccomendation model implementation
+    # Expecting list of product IDs
+    # product_recommendation_id = recommendation_model(user_vector, product_vectors)
+    # print(user_vector)
+    # print(product_vectors)
+
+    product_recommendation_id = 4
+    product = select(f'SELECT * FROM FinancialProducts WHERE id={product_recommendation_id};', True)
+    return product
 
 def metrics_service():
     pass

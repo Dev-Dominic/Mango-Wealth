@@ -10,7 +10,6 @@ USE innodb;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
-DROP TABLE IF EXISTS Users;
 CREATE TABLE Users(
     id INT AUTO_INCREMENT NOT NULL,
     first_name VARCHAR(30) NOT NULL,
@@ -25,25 +24,22 @@ CREATE TABLE Users(
     PRIMARY KEY(id)
 );
 
-DROP TABLE IF EXISTS UserFinancialsRecords;
 CREATE TABLE UserFinancialsRecords(
     id INT NOT NULL AUTO_INCREMENT,
     income DOUBLE NOT NULL,
     expenses DOUBLE NOT NULL,
-    recordDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    recordDate DATE NOT NULL DEFAULT NOW(),
     userId INT NOT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY(userId) REFERENCES Users(id) ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS FinancialInstitutions;
 CREATE TABLE FinancialInstitutions(
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(256) NOT NULL,
     PRIMARY KEY(id)
 );
 
-DROP TABLE IF EXISTS UserFinancialInstitutions;
 CREATE TABLE UserFinancialInstitutions(
     userId INT NOT NULL,
     institutionId INT NOT NULL,
@@ -52,14 +48,12 @@ CREATE TABLE UserFinancialInstitutions(
     FOREIGN KEY(institutionId) REFERENCES FinancialInstitutions(id) ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS ProductTypes;
 CREATE TABLE ProductTypes(
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(256) NOT NULL,
     PRIMARY KEY(id)
 );
 
-DROP TABLE IF EXISTS FinancialProducts;
 CREATE TABLE FinancialProducts(
     id INT NOT NULL AUTO_INCREMENT,
     product_name VARCHAR(256) NOT NULL,
@@ -67,6 +61,7 @@ CREATE TABLE FinancialProducts(
     minimum_deposit INT NOT NULL DEFAULT 0,
     risk_profile TINYINT(100) NOT NULL,
     interest_rate DOUBLE NOT NULL,
+    maturity_period INT NOT NULL DEFAULT 0,
     product_link TEXT NOT NULL,
     productTypeId INT NOT NULL,
     institutionId INT NOT NULL,
@@ -75,33 +70,30 @@ CREATE TABLE FinancialProducts(
     FOREIGN KEY(institutionId) REFERENCES FinancialInstitutions(id) ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS Fees;
 CREATE TABLE Fees(
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(256) NOT NULL,
     PRIMARY KEY(id)
 );
 
-DROP TABLE IF EXISTS FinancialProductsFees;
 CREATE TABLE FinancialProductsFees(
     financialProductId INT NOT NULL,
     feesId INT NOT NULL,
+    amount DOUBLE NOT NULL,
     PRIMARY KEY(financialProductId, feesId),
     FOREIGN KEY(financialProductId) REFERENCES FinancialProducts(id) ON DELETE CASCADE,
     FOREIGN KEY(feesId) REFERENCES Fees(id) ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS Recommendations;
 CREATE TABLE Recommendations(
     userId INT NOT NULL,
     financialProductId INT NOT NULL,
-    recommendationDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    recommendationDate DATE NOT NULL DEFAULT NOW(),
     PRIMARY KEY(userId, financialProductId),
     FOREIGN KEY(userId) REFERENCES Users(id) ON DELETE CASCADE,
     FOREIGN KEY(financialProductId) REFERENCES FinancialProducts(id) ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS UserProductPreferences;
 CREATE TABLE UserProductPreferences(
     userId INT NOT NULL,
     productTypeId INT NOT NULL,
@@ -116,7 +108,6 @@ CREATE TABLE UserProductPreferences(
     FOREIGN KEY(productTypeId) REFERENCES ProductTypes(id) ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS Goals;
 CREATE TABLE Goals(
     id INT NOT NULL,
     userId INT NOT NULL,
@@ -129,7 +120,6 @@ CREATE TABLE Goals(
     FOREIGN KEY(financialProductId) REFERENCES FinancialProducts(id) ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS Progress;
 CREATE TABLE Progress(
     progressId INT NOT NULL,
     goalId INT NOT NULL,
@@ -146,7 +136,39 @@ INSERT INTO ProductTypes(name) VALUES("SAVINGS");
 INSERT INTO ProductTypes(name) VALUES("INVESTMENTS");
 INSERT INTO ProductTypes(name) VALUES("LOANS");
 
+-- Inserting Financial Instituions
+INSERT INTO FinancialInstitutions(name) VALUES("Scotia Bank");
+INSERT INTO FinancialInstitutions(name) VALUES("NCB");
+INSERT INTO FinancialInstitutions(name) VALUES("JN Bank");
+
+-- Inserting Fees
+INSERT INTO Fees(name) VALUES("Other");
+
 /* ######### STORED PROCEDURE FOR CREATING VECTOR OBJECTS  ################# */
 
+-- User Vector
+DELIMITER //
+CREATE PROCEDURE UserVector(IN USERID INT)
+BEGIN
+    SELECT u.gender AS sex, u.age AS age, u.employment_status AS work_status,
+    u.risk_profile AS risk_profile, uf.income AS income, uf.expenses AS expenses,
+    (uf.income - uf.expenses) AS net_income FROM Users AS u
+    JOIN UserFinancialsRecords AS uf ON uf.userId = u.id
+    WHERE uf.userId = USERID
+    ORDER BY uf.recordDate DESC LIMIT 1;
+END;
+//
+
+-- Product Vector
+CREATE PROCEDURE ProductVector()
+BEGIN
+    SELECT f.id AS id, f.minimum_deposit as minimum_deposit, SUM(fpf.amount) AS additional_fees,
+    f.maturity_period AS maturity_period, f.interest_rate AS interest_rate,
+    f.risk_profile AS risk_profile FROM FinancialProducts AS f
+    JOIN FinancialProductsFees AS fpf ON f.id = fpf.financialProductId
+    GROUP BY f.id;
+END;
+//
+DELIMITER ;
 
 SET FOREIGN_KEY_CHECKS = 1;

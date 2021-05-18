@@ -2,7 +2,7 @@ from flask import Blueprint, request
 import json
 
 from .services import (get_product_types_service, onboarding_service,
-                       login_service, metrics_service, tracking_service)
+                       login_service, create_goal_service, metrics_service, tracking_service)
 
 from .utils.auth import auth_guard
 
@@ -19,9 +19,9 @@ def onboarding():
         # Retrieving body and executing onboarding process using user sign up
         # data, where a response is generated.
         onboarding_body = request.json
-        response = onboarding_service(onboarding_body)
+        success, user_id = onboarding_service(onboarding_body)
 
-        return json.dumps({"success": response}), 200
+        return json.dumps({"success": success, "user_id": user_id}), 200
     except Exception as e:
         print(f"Error during onboarding: {e}")
         error_message = "Unable to complete onboarding process"
@@ -55,9 +55,15 @@ def login():
 @api.route('/goal', methods=['POST'])
 def create_goal():
     try:
+        time_period = request.json.get('time_period')
+        value = request.json.get('value')
+        user_id = request.json.get('user_id')
+
+        response = create_goal_service(time_period, value, user_id)
+
         return json.dumps(response), 200
     except Exception as e:
-        print("Error during goal creation: {e}")
+        print(f"Error during goal creation: {e}")
         error_message = "Unable to create new user goal"
 
         response = {
