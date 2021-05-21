@@ -228,7 +228,7 @@ def predictInvestmentPreference(user_dict):
 
 
 # Print statements just for debugging
-if __name__ == "__main__":
+def recommendations(user, product_list):
     # products = [[1, 0, 0, 1, 1],
     #             [1, 0, 0, 1, 1],
     #             [0, 1, 1, 1, 1],
@@ -267,8 +267,8 @@ if __name__ == "__main__":
 
 # --------------------------------------------
 
-    product_list = ...  # Get this from API. LIST OF LISTS
-    user = ...  # Get this from API. One user LIST
+    # product_list = ...  # Get this from API. LIST OF LISTS
+    # user = ...  # Get this from API. One user LIST
 
     user_vec = getUserVector(user) # user_vec == user_dict
 
@@ -349,6 +349,7 @@ if __name__ == "__main__":
             recommendation_scores.append(
                 investment_minimum_deposit_score + investment_additional_fees_score + investment_maturity_period_score + investment_interest_rate_score + investment_risk_score_score)
 
-    for index, score in enumerate(recommendation_scores):
-        print(index + 1, score)
+    # for index, score in enumerate(recommendation_scores):
+        # print(index + 1, score)
+    return recommendation_scores
 

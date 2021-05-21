@@ -1,5 +1,7 @@
 import os
 from .utils.db import db_connection, insert_update, select, call_proc
+from .functions import (recommendations, getUserVector, predictSavingPreference,
+predictLoanPreference, predictInvestmentPreference)
 import hashlib
 import jwt
 
@@ -124,21 +126,32 @@ def create_goal_service(time_period, value, user_id):
 
     # Getting user vector based on user_id
     user_vector = list(call_proc('UserVector', [user_id])[0])
-    user_vector.append(time_period)
-    user_vector.append(value)
+    print(user_vector)
+    print(predictSavingPreference(getUserVector(user_vector)))
+    print(predictLoanPreference(getUserVector(user_vector)))
+    print(predictInvestmentPreference(getUserVector(user_vector)))
+    # user_vector.append(time_period)
+    # user_vector.append(value)
 
     # Getting all product vectors
     product_vectors = [list(entry) for entry in call_proc('ProductVector')]
 
     # Pass to reccomendation model implementation
     # Expecting list of product IDs
-    # product_recommendation_id = recommendation_model(user_vector, product_vectors)
+    product_recommendations = recommendations(user_vector, product_vectors)
+    product_indexes = sorted([(x,i) for (i,x) in enumerate(product_recommendations)], reverse=True )[:5]
+    for i, entry in enumerate(product_recommendations):
+        print(i, entry)
+    # print(product_recommendations)
     # print(user_vector)
     # print(product_vectors)
 
-    product_recommendation_id = 4
-    product = select(f'SELECT * FROM FinancialProducts WHERE id={product_recommendation_id};', True)
-    return product
+    product_details = []
+    for score, i in product_indexes:
+        product_details.append(select(f'SELECT * FROM FinancialProducts AS fp JOIN ProductTypes AS pt ON pt.id = fp.productTypeId WHERE fp.id={i};', True))
+
+    print(product_details)
+    return product_details
 
 def metrics_service():
     pass
